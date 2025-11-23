@@ -1,0 +1,238 @@
+{% extends "orders/base.html" %}
+{% block title %}Order food online · FoodieGo{% endblock %}
+
+{% block extra_head %}
+<style>
+    :root {
+        --fd-orange: #ff6b35;
+        --fd-orange-soft: #ffe5d6;
+        --fd-text-muted: #6b7280;
+    }
+
+    .hero-card {
+        background: linear-gradient(135deg, #ff6b35, #ff9f1c);
+        border-radius: 24px;
+        padding: 28px 20px;
+        color: #fff;
+        margin-bottom: 24px;
+        box-shadow: 0 18px 40px rgba(249, 115, 22, 0.35);
+    }
+
+    @media (min-width: 992px) {
+        .hero-card {
+            padding: 36px 32px;
+        }
+    }
+
+    .hero-title {
+        font-weight: 800;
+        font-size: 2.1rem;
+    }
+
+    .hero-sub {
+        font-size: 0.98rem;
+        opacity: 0.9;
+    }
+
+    .hero-input {
+        border-radius: 999px;
+        border: none;
+        padding: 10px 14px;
+        font-size: 0.95rem;
+    }
+
+    .hero-pill-info {
+        font-size: 0.8rem;
+        opacity: 0.9;
+    }
+
+    .filters-bar {
+        background-color: #ffffff;
+        border-radius: 999px;
+        padding: 8px 12px;
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .filter-chip {
+        border-radius: 999px;
+        border: 1px solid #e5e7eb;
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        background-color: #fff;
+        cursor: pointer;
+        color: var(--fd-text-muted);
+    }
+
+    .filter-chip.active {
+        background-color: var(--fd-orange-soft);
+        border-color: var(--fd-orange);
+        color: #b45309;
+        font-weight: 600;
+    }
+
+    .section-title {
+        font-weight: 700;
+        font-size: 1.15rem;
+        margin-bottom: 3px;
+    }
+
+    .section-subtitle {
+        font-size: 0.86rem;
+        color: var(--fd-text-muted);
+        margin-bottom: 14px;
+    }
+
+    .restaurant-card {
+        background-color: #ffffff;
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .restaurant-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 30px rgba(15, 23, 42, 0.12);
+    }
+
+    .restaurant-img {
+        height: 150px;
+        background-size: cover;
+        background-position: center;
+        background-image: linear-gradient(135deg, #fed7aa, #fecaca);
+    }
+
+    .restaurant-body {
+        padding: 12px 14px 10px;
+    }
+
+    .restaurant-name {
+        font-weight: 600;
+        font-size: 1rem;
+        margin-bottom: 2px;
+    }
+
+    .restaurant-meta {
+        font-size: 0.82rem;
+        color: var(--fd-text-muted);
+    }
+
+    .restaurant-footer {
+        font-size: 0.78rem;
+        color: #9ca3af;
+        padding: 0 14px 10px;
+    }
+
+    .badge-rating {
+        background-color: #16a34a;
+        color: #fff;
+        font-size: 0.8rem;
+        border-radius: 999px;
+        padding: 3px 8px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<div class="hero-card">
+    <div class="row align-items-center g-3">
+        <div class="col-lg-7">
+            <div class="hero-title mb-2">
+                Order food & snacks in minutes.
+            </div>
+            <p class="hero-sub mb-3">
+                Handpicked restaurants, real-time menus and quick re-ordering for your cravings.
+            </p>
+
+            <div class="row g-2">
+                <div class="col-md-4">
+                    <input type="text" class="hero-input w-100" placeholder="📍 Enter area / locality">
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="hero-input w-100" placeholder="🔍 Search for restaurant or dish">
+                </div>
+                <div class="col-md-3 d-grid">
+                    <button class="btn btn-light btn-pill fw-semibold">
+                        Explore now
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-2 hero-pill-info">
+                ⭐ Users love: “Fast delivery”, “Budget friendly combos”
+            </div>
+        </div>
+        <div class="col-lg-5 d-none d-lg-block">
+            <div class="text-end">
+                <span class="badge bg-light text-dark rounded-pill mb-2">
+                    New · Reorder in 2 taps
+                </span>
+                <img src="https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Food" class="img-fluid rounded-4 shadow" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-bar">
+    <span class="filter-chip active">✨ Best for you</span>
+    <span class="filter-chip">🔥 Offers</span>
+    <span class="filter-chip">⏱ Under 30 mins</span>
+    <span class="filter-chip">⭐ 4.0+</span>
+    <span class="filter-chip">🥦 Pure veg</span>
+    <span class="filter-chip">🕗 Late night</span>
+</div>
+
+<!-- RESTAURANT GRID -->
+<div class="section-title">Restaurants near you</div>
+<div class="section-subtitle">
+    Based on location & ratings. Click a card to view full menu.
+</div>
+
+<div class="row g-4">
+    {% for r in restaurants %}
+    <div class="col-12 col-sm-6 col-lg-4">
+        <a href="{% url 'restaurant_detail' r.pk %}" class="text-decoration-none text-reset">
+            <div class="restaurant-card">
+                <div class="restaurant-img"></div>
+                <div class="restaurant-body">
+                    <div class="d-flex justify-content-between align-items-start mb-1">
+                        <div>
+                            <div class="restaurant-name">{{ r.name }}</div>
+                            <div class="restaurant-meta">
+                                {{ r.address|truncatechars:32 }}
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge-rating">4.5 ★</span>
+                            <div class="restaurant-meta">30–40 mins</div>
+                        </div>
+                    </div>
+                </div>
+                {% if r.description %}
+                <div class="restaurant-footer">
+                    {{ r.description|truncatewords:10 }}
+                </div>
+                {% endif %}
+            </div>
+        </a>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <p class="text-muted">No restaurants added yet. Use admin panel to create some.</p>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
